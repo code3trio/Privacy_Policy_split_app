@@ -1333,7 +1333,7 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="policy-search" class="search-input" placeholder="Search the privacy policy (e.g. 'delete', 'cookies', 'contacts')...">
+            <input type="text" id="policy-search" class="search-input" placeholder="Search the privacy policy (e.g. 'delete', 'cookies', 'repayments')...">
             <span class="search-results-badge" id="search-badge">0 matches</span>
             <button class="search-clear-btn" id="search-clear" aria-label="Clear search">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1424,7 +1424,7 @@
                     <h2>1. Introduction</h2>
                 </div>
                 <p>Welcome to <strong>Split & Settle</strong> (referred to as the "App", "we", "us", or "our"). We are committed to safeguarding your personal data and ensuring that your transparency rights are fully respected. This Privacy Policy describes how we collect, store, share, and protect your information when you download, install, access, or use the Split & Settle mobile application and associated web interfaces.</p>
-                <p>By creating a Split & Settle account, you acknowledge that you have read and understood the rules regarding transaction logging, friend-list syncing, and group calculations outlined herein. If you do not agree with these principles, please do not use the App.</p>
+                <p>By creating a Split & Settle account, you acknowledge that you have read and understood the rules regarding transaction logging, manual friend connections, and group calculations outlined herein. If you do not agree with these principles, please do not use the App.</p>
             </section>
 
             <!-- Section 2 -->
@@ -1459,8 +1459,8 @@
                             </tr>
                             <tr>
                                 <td><span class="table-badge">Social Circles</span></td>
-                                <td>Optionally synced contacts (hashed metadata) and manually generated friendship connections.</td>
-                                <td>Quickly lookup and add friends to a group without manual input of details.</td>
+                                <td>Manually generated friendship connections and group memberships.</td>
+                                <td>Allows you to add friends to groups and split bills directly.</td>
                             </tr>
                             <tr>
                                 <td><span class="table-badge">Device Metadata</span></td>
@@ -1502,8 +1502,7 @@
                 <p>Because bill splitting is fundamentally collaborative, sharing is native to the App. Your information is shared under the following conditions:</p>
                 <h3>Shared with Group Members:</h3>
                 <p>Any person in a group with you can see your profile name, picture, email, and phone number (if you allow searchability). They will also view details, comments, and receipt images for any expenses you add to that group.</p>
-                <h3>Shared with Contacts:</h3>
-                <p>If another user has your phone number or email address saved in their physical device address book and syncs it, they will see that you have a Split & Settle account, letting them add you directly.</p>
+
                 <h3>Third-Party Service Providers:</h3>
                 <p>We work with trusted partners to host servers, deliver emails/notifications, and process errors. These partners have zero permission to use your personal information for their own marketing campaigns.</p>
             </section>
@@ -1535,28 +1534,6 @@
                     </div>
 
                     <div class="simulator-toggles">
-                        <div class="toggle-item">
-                            <div class="toggle-info">
-                                <span class="toggle-name">Contact List Syncing</span>
-                                <span class="toggle-desc">Auto-find friends on Split & Settle who match your contacts.</span>
-                            </div>
-                            <label class="switch" aria-label="Toggle contact syncing">
-                                <input type="checkbox" id="toggle-contacts" class="sim-toggle" data-impact="15">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="toggle-item">
-                            <div class="toggle-info">
-                                <span class="toggle-name">Discoverable by Non-Contacts</span>
-                                <span class="toggle-desc">Allow users who only have your email address to add you to groups.</span>
-                            </div>
-                            <label class="switch" aria-label="Toggle discoverability">
-                                <input type="checkbox" id="toggle-discover" class="sim-toggle" data-impact="15">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-
                         <div class="toggle-item">
                             <div class="toggle-info">
                                 <span class="toggle-name">Location Services Metadata</span>
