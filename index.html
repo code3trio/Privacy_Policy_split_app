@@ -1967,10 +1967,14 @@
         });
 
         // 5. SECURE DPO CONTACT FORM TOAST SUBMISSION
-        function submitForm() {
+        async function submitForm() {
             const btnSubmit = document.getElementById('btn-submit-form');
             const originalText = btnSubmit.innerHTML;
             
+            const name = document.getElementById('usr-name').value;
+            const email = document.getElementById('usr-email').value;
+            const message = document.getElementById('usr-msg').value;
+
             btnSubmit.innerHTML = `
                 <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" class="spinning" style="animation: spin 1s linear infinite; width:16px; height:16px;">
                     <circle cx="12" cy="12" r="10" fill="none" stroke-dasharray="32" stroke-dashoffset="10"></circle>
@@ -1979,15 +1983,59 @@
             `;
             btnSubmit.disabled = true;
 
-            // Simulate server network latency
-            setTimeout(() => {
-                // Show Success Toast
+            try {
+                // CONFIGURATION: Paste your Formspree Endpoint URL here (e.g. "https://formspree.io/f/xanyqkde")
+                const FORMSPREE_ENDPOINT = "https://formspree.io/f/8d375bd4-a3fc-47cf-9637-78c8e5e13ea8";
+
+                if (!FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT === "YOUR_FORMSPREE_ENDPOINT_HERE") {
+                    throw new Error("Formspree endpoint is not configured. Please paste your Formspree URL in the script.");
+                }
+
+                // Submit form to Formspree
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        message: message
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok || result.success || result.ok) {
+                    // Show Success Toast
+                    formToast.querySelector('span').textContent = "Our security compliance office will respond shortly.";
+                    formToast.classList.add('show');
+                    document.getElementById('dpo-form').reset();
+                } else {
+                    throw new Error(result.error || "Submission failed");
+                }
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                
+                // Show Error Toast
+                const toastTitle = formToast.querySelector('.toast-title');
+                const toastSpan = formToast.querySelector('span');
+                const originalTitle = toastTitle.textContent;
+                const originalSpan = toastSpan.textContent;
+                
+                toastTitle.textContent = "Submission Failed";
+                toastSpan.textContent = "Could not send message. Please try again later.";
+                formToast.style.borderColor = "#ef4444";
                 formToast.classList.add('show');
                 
-                // Clear Form
-                document.getElementById('dpo-form').reset();
-                
-                // Reset Button
+                setTimeout(() => {
+                    formToast.style.borderColor = "var(--accent-primary)";
+                    toastTitle.textContent = originalTitle;
+                    toastSpan.textContent = originalSpan;
+                }, 4000);
+            } finally {
+                // Reset Button state
                 btnSubmit.innerHTML = originalText;
                 btnSubmit.disabled = false;
 
@@ -1995,7 +2043,7 @@
                 setTimeout(() => {
                     formToast.classList.remove('show');
                 }, 4000);
-            }, 1200);
+            }
         }
 
         // Add spinner CSS animation dynamically
